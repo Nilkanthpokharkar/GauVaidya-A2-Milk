@@ -1128,7 +1128,7 @@ const GaudevaA2Milk = () => {
               <textarea 
                 className="form-input" 
                 placeholder="Special Instructions (Optional)" 
-                rows="3"
+                rows="3" 
                 style={{ resize: 'vertical', minHeight: '100px' }}
               ></textarea>
               <button type="submit" className="form-submit">Place Order</button>
