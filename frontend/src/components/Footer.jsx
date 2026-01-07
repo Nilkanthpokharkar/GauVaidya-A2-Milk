@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="col-lg-4 col-md-6 mb-4">
             <div className="footer-logo">
               <Link to="/" className="d-flex align-items-center mb-3">
-                <img src="public/images/image.png" alt="GouVaidya" height="50" className="me-2" />
+                <img src="/images/image.png" alt="GouVaidya" height="50" className="me-2" />
                 <h3 className="fw-bold mb-0" style={{ color: '#FF8C42' }}>GouVaidya</h3>
               </Link>
               <p className="mb-4">

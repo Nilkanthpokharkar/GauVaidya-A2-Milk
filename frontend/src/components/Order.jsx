@@ -6,7 +6,7 @@ const Order = ({ show, onClose, product }) => {
     phone: '',
     email: '',
     address: '',
-    product: product || '',
+    product: '',
     quantity: '1',
     instructions: ''
   });
@@ -20,13 +20,19 @@ const Order = ({ show, onClose, product }) => {
     ? "http://localhost:5006" 
     : "https://gauvaidya-a2-milk-backend.onrender.com"; 
 
+  // Sync product from props to form state
   useEffect(() => {
-    setFormData(prev => ({ ...prev, product: product || '' }));
-  }, [product]);
+    if (product) {
+      // If product is an object (e.g., from Products.jsx), get the name or ID
+      const productValue = typeof product === 'object' ? product.id || product.name : product;
+      setFormData(prev => ({ ...prev, product: productValue }));
+    }
+  }, [product, show]);
 
-  // Function to play success sound
+  // Play success sound from public/sounds/success.mp3
   const playSuccessSound = () => {
     try {
+      // IMPORTANT: No '/public' in the path
       const audio = new Audio('/sounds/success.mp3');
       audio.play();
     } catch (error) {
@@ -55,30 +61,23 @@ const Order = ({ show, onClose, product }) => {
       const data = await response.json();
 
       if (response.ok) {
-        // Play success sound
         playSuccessSound();
-
         setSuccessMessage('Order placed successfully! We will contact you soon.');
         
         setTimeout(() => {
           onClose();
           setSuccessMessage('');
           setFormData({
-            name: '',
-            phone: '',
-            email: '',
-            address: '',
-            product: '',
-            quantity: '1',
-            instructions: ''
+            name: '', phone: '', email: '', address: '',
+            product: '', quantity: '1', instructions: ''
           });
         }, 3000);
       } else {
-        setErrorMessage(data.message || 'Failed to place order. Please try again.');
+        setErrorMessage(data.message || 'Failed to place order.');
       }
     } catch (error) {
       console.error("Connection Error:", error);
-      setErrorMessage('Server connection failed. Please check your internet or try again later.');
+      setErrorMessage('Server is waking up or offline. Please wait 30 seconds and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -88,10 +87,10 @@ const Order = ({ show, onClose, product }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-content animate__animated animate__fadeInDown">
         <button 
-          className="position-absolute top-0 end-0 btn btn-link p-2 text-muted"
-          style={{ fontSize: '1.5rem', textDecoration: 'none', border: 'none', background: 'none' }}
+          className="position-absolute top-0 end-0 btn btn-link p-3 text-muted"
+          style={{ fontSize: '1.5rem', textDecoration: 'none', border: 'none', background: 'none', zIndex: 10 }}
           onClick={onClose}
         >
           ×
@@ -100,8 +99,8 @@ const Order = ({ show, onClose, product }) => {
         <h3 className="text-center mb-4 fw-semibold">Order Fresh A2 Milk</h3>
 
         {successMessage && (
-          <div className="alert alert-success text-center border-0 shadow-sm animate__animated animate__fadeIn">
-            <div className="mb-2">🎉</div>
+          <div className="alert alert-success text-center border-0 shadow-sm">
+            <div className="fs-1 mb-2">🎉</div>
             {successMessage}
           </div>
         )}
@@ -116,58 +115,36 @@ const Order = ({ show, onClose, product }) => {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Your Name" 
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required 
+                type="text" className="form-control" placeholder="Your Name" 
+                name="name" value={formData.name} onChange={handleChange} required 
               />
             </div>
 
             <div className="mb-3">
               <input 
-                type="tel" 
-                className="form-control" 
-                placeholder="Mobile Number" 
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required 
+                type="tel" className="form-control" placeholder="Mobile Number" 
+                name="phone" value={formData.phone} onChange={handleChange} required 
               />
             </div>
 
             <div className="mb-3">
               <input 
-                type="email" 
-                className="form-control" 
-                placeholder="Email Address (Optional)" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
+                type="email" className="form-control" placeholder="Email Address (Optional)" 
+                name="email" value={formData.email} onChange={handleChange}
               />
             </div>
 
             <div className="mb-3">
               <input 
-                type="text" 
-                className="form-control" 
-                placeholder="Delivery Address" 
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required 
+                type="text" className="form-control" placeholder="Delivery Address" 
+                name="address" value={formData.address} onChange={handleChange} required 
               />
             </div>
 
             <div className="mb-3">
               <select 
-                className="form-select" 
-                name="product"
-                value={formData.product}
-                onChange={handleChange}
-                required
+                className="form-select" name="product"
+                value={formData.product} onChange={handleChange} required
               >
                 <option value="">Select Product</option>
                 <option value="a2-milk-500ml">A2 Fresh Milk 500ml - ₹50</option>
@@ -180,41 +157,32 @@ const Order = ({ show, onClose, product }) => {
             </div>
 
             <div className="mb-3">
+              <label className="small text-muted mb-1">Quantity</label>
               <input 
-                type="number" 
-                className="form-control" 
-                placeholder="Quantity" 
-                min="1" 
-                name="quantity"
-                value={formData.quantity}
-                onChange={handleChange}
-                required 
+                type="number" className="form-control" min="1" 
+                name="quantity" value={formData.quantity} onChange={handleChange} required 
               />
             </div>
 
             <div className="mb-4">
               <textarea 
-                className="form-control" 
-                placeholder="Special Instructions (Optional)" 
-                rows="3"
-                name="instructions"
-                value={formData.instructions}
-                onChange={handleChange}
-                style={{ resize: 'vertical' }}
+                className="form-control" placeholder="Special Instructions (Optional)" 
+                rows="2" name="instructions" value={formData.instructions} 
+                onChange={handleChange} style={{ resize: 'none' }}
               ></textarea>
             </div>
 
             <button type="submit" className="btn btn-warning w-100 fw-bold py-2 shadow-sm" disabled={isSubmitting}>
               {isSubmitting ? (
-                <span><span className="spinner-border spinner-border-sm me-2"></span>Placing Order...</span>
-              ) : 'Place Order'}
+                <span><span className="spinner-border spinner-border-sm me-2"></span>Processing...</span>
+              ) : 'Place Order Now'}
             </button>
           </form>
         )}
 
         <div className="text-center mt-3">
           <small className="text-muted">
-            📞 Call us at +91 93226 04350 for instant orders
+            📞 Support: +91 93226 04350
           </small>
         </div>
       </div>
