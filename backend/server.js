@@ -5,39 +5,44 @@ require("dotenv").config();
 
 const app = express();
 
-// Middleware
-// Allow requests from your local machine and your Render frontend
+// --- 1. ENHANCED MIDDLEWARE ---
+// This configuration ensures that Render's HTTPS and pre-flight requests pass through
 app.use(cors({
-  origin: "*" // In production, you can replace "*" with your specific Render frontend URL
+  origin: "*", // Allows all origins. For tighter security, use your specific frontend Render URL
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 app.use(express.json());
 
-// Routes
+// Handle OPTIONS pre-flight requests globally
+app.options("*", cors());
+
+// --- 2. ROUTES ---
 const contactRoutes = require("./routes/contactRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
 app.use("/api/contact", contactRoutes);
-app.use("/api/orders", orderRoutes); // Changed to plural to match the frontend call
+app.use("/api/orders", orderRoutes);
 
-// Health Check Route (Helps Render monitor your app)
+// Health Check Route
 app.get("/", (req, res) => {
-  res.send("GauVaidya Backend is running...");
+  res.status(200).json({ status: "ok", message: "GauVaidya Backend is running..." });
 });
 
-// Use Render's dynamic PORT or default to 5006
+// --- 3. SERVER LOGIC ---
 const PORT = process.env.PORT || 5006;
 
-// Connect DB and Start server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected successfully");
     
-    // IMPORTANT: Listen on 0.0.0.0 for Render deployment
-    app.listen(PORT, "0.0.0.0", () =>
-      console.log(`🚀 Server running on port ${PORT}`)
-    );
+    // Listen on 0.0.0.0 is MANDATORY for Render
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
   })
   .catch(err => {
     console.error("❌ MongoDB connection error:", err);
-    process.exit(1); // Exit if DB connection fails
+    process.exit(1); 
   });
