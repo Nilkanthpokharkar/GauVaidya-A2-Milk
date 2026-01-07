@@ -15,10 +15,11 @@ const OrderModal = ({ show, onClose, product }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Determine Backend URL based on environment
+  // IMPORTANT: Replace the URL below with your actual Render Backend URL 
+  // (Found in Render Dashboard -> Backend Service -> URL at the top)
   const API_BASE_URL = window.location.hostname === 'localhost' 
     ? "http://localhost:5006" 
-    : "https://your-backend-name.onrender.com"; // Replace with your actual Render Backend URL
+    : "https://gauvaidya-a2-milk-backend.onrender.com"; 
 
   useEffect(() => {
     setFormData(prev => ({ ...prev, product: product || '' }));
@@ -47,7 +48,6 @@ const OrderModal = ({ show, onClose, product }) => {
       if (response.ok) {
         setSuccessMessage('Order placed successfully! We will contact you soon.');
         
-        // Reset form after success
         setTimeout(() => {
           onClose();
           setSuccessMessage('');
@@ -66,7 +66,7 @@ const OrderModal = ({ show, onClose, product }) => {
       }
     } catch (error) {
       console.error("Connection Error:", error);
-      setErrorMessage('Server connection failed. Is the backend running?');
+      setErrorMessage('Server connection failed. Please check your internet or try again later.');
     } finally {
       setIsSubmitting(false);
     }
@@ -79,7 +79,7 @@ const OrderModal = ({ show, onClose, product }) => {
       <div className="modal-content">
         <button 
           className="position-absolute top-0 end-0 btn btn-link p-2 text-muted"
-          style={{ fontSize: '1.5rem', textDecoration: 'none' }}
+          style={{ fontSize: '1.5rem', textDecoration: 'none', border: 'none', background: 'none' }}
           onClick={onClose}
         >
           ×
@@ -88,97 +88,113 @@ const OrderModal = ({ show, onClose, product }) => {
         <h3 className="text-center mb-4 fw-semibold">Order Fresh A2 Milk</h3>
 
         {successMessage && (
-          <div className="alert alert-success text-center">
+          <div className="alert alert-success text-center border-0 shadow-sm">
             {successMessage}
           </div>
         )}
 
         {errorMessage && (
-          <div className="alert alert-danger text-center">
+          <div className="alert alert-danger text-center border-0 shadow-sm">
             {errorMessage}
           </div>
         )}
 
         {!successMessage && (
           <form onSubmit={handleSubmit}>
-            <input 
-              type="text" 
-              className="form-control mb-3" 
-              placeholder="Your Name" 
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required 
-            />
+            <div className="mb-3">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Your Name" 
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required 
+              />
+            </div>
 
-            <input 
-              type="tel" 
-              className="form-control mb-3" 
-              placeholder="Mobile Number" 
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required 
-            />
+            <div className="mb-3">
+              <input 
+                type="tel" 
+                className="form-control" 
+                placeholder="Mobile Number" 
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required 
+              />
+            </div>
 
-            <input 
-              type="email" 
-              className="form-control mb-3" 
-              placeholder="Email Address" 
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+            <div className="mb-3">
+              <input 
+                type="email" 
+                className="form-control" 
+                placeholder="Email Address (Optional)" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
 
-            <input 
-              type="text" 
-              className="form-control mb-3" 
-              placeholder="Delivery Address" 
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              required 
-            />
+            <div className="mb-3">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Delivery Address" 
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                required 
+              />
+            </div>
 
-            <select 
-              className="form-select mb-3" 
-              name="product"
-              value={formData.product}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Product</option>
-              <option value="a2-milk-500ml">A2 Fresh Milk 500ml - ₹50</option>
-              <option value="a2-milk-1l">A2 Fresh Milk 1L - ₹100</option>
-              <option value="a2-ghee">A2 Cow Ghee 500ml - ₹850</option>
-              <option value="a2-paneer">A2 Paneer 250g - ₹180</option>
-              <option value="a2-curd">A2 Curd 500ml - ₹45</option>
-              <option value="a2-buttermilk">A2 Buttermilk 300ml - ₹25</option>
-            </select>
+            <div className="mb-3">
+              <select 
+                className="form-select" 
+                name="product"
+                value={formData.product}
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Product</option>
+                <option value="a2-milk-500ml">A2 Fresh Milk 500ml - ₹50</option>
+                <option value="a2-milk-1l">A2 Fresh Milk 1L - ₹100</option>
+                <option value="a2-ghee">A2 Cow Ghee 500ml - ₹850</option>
+                <option value="a2-paneer">A2 Paneer 250g - ₹180</option>
+                <option value="a2-curd">A2 Curd 500ml - ₹45</option>
+                <option value="a2-buttermilk">A2 Buttermilk 300ml - ₹25</option>
+              </select>
+            </div>
 
-            <input 
-              type="number" 
-              className="form-control mb-3" 
-              placeholder="Quantity" 
-              min="1" 
-              name="quantity"
-              value={formData.quantity}
-              onChange={handleChange}
-              required 
-            />
+            <div className="mb-3">
+              <input 
+                type="number" 
+                className="form-control" 
+                placeholder="Quantity" 
+                min="1" 
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleChange}
+                required 
+              />
+            </div>
 
-            <textarea 
-              className="form-control mb-4" 
-              placeholder="Special Instructions (Optional)" 
-              rows="3"
-              name="instructions"
-              value={formData.instructions}
-              onChange={handleChange}
-              style={{ resize: 'vertical' }}
-            ></textarea>
+            <div className="mb-4">
+              <textarea 
+                className="form-control" 
+                placeholder="Special Instructions (Optional)" 
+                rows="3"
+                name="instructions"
+                value={formData.instructions}
+                onChange={handleChange}
+                style={{ resize: 'vertical' }}
+              ></textarea>
+            </div>
 
-            <button type="submit" className="btn btn-warning w-100" disabled={isSubmitting}>
-              {isSubmitting ? '⏳ Placing Order...' : 'Place Order'}
+            <button type="submit" className="btn btn-warning w-100 fw-bold py-2 shadow-sm" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <span><span className="spinner-border spinner-border-sm me-2"></span>Placing Order...</span>
+              ) : 'Place Order'}
             </button>
           </form>
         )}

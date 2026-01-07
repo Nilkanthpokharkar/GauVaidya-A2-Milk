@@ -30,7 +30,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="navbar-brand">
             <img 
-              src="public/images/image.png" 
+              src="/images/image.png" 
               alt="GouVaidya A2 Milk" 
               className="logo-image"
             />
