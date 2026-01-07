@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaWhatsapp, FaTruck, FaLeaf, FaAward, FaHeart, FaShoppingCart, FaChevronRight, FaStar, FaPlay, FaCheck } from 'react-icons/fa';
-import OrderModal from '../components/OrderModal';
+import Order from '../components/Order';
 
 const Home = () => {
   const [showForm, setShowForm] = useState(false);
@@ -446,7 +446,7 @@ const Home = () => {
       </section>
 
       {/* Order Modal */}
-      <OrderModal show={showForm} onClose={() => setShowForm(false)} />
+      <Order show={showForm} onClose={() => setShowForm(false)} />
     </>
   );
 };

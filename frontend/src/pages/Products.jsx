@@ -1,7 +1,7 @@
 // src/pages/Products.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import OrderModal from '../components/OrderModal';
+import Order from '../components/Order';
 
 const Products = () => {
   const [showForm, setShowForm] = useState(false);
@@ -121,7 +121,7 @@ const Products = () => {
         </div>
       </div>
 
-      <OrderModal 
+      <Order 
         show={showForm} 
         onClose={() => setShowForm(false)} 
         product={selectedProduct}
