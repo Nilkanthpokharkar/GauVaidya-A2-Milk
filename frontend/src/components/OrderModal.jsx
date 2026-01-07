@@ -1,4 +1,3 @@
-// src/components/OrderModal.js
 import React, { useState, useEffect } from 'react';
 
 const OrderModal = ({ show, onClose, product }) => {
@@ -14,6 +13,12 @@ const OrderModal = ({ show, onClose, product }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Determine Backend URL based on environment
+  const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? "http://localhost:5006" 
+    : "https://your-backend-name.onrender.com"; // Replace with your actual Render Backend URL
 
   useEffect(() => {
     setFormData(prev => ({ ...prev, product: product || '' }));
@@ -26,25 +31,45 @@ const OrderModal = ({ show, onClose, product }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSuccessMessage('Order placed successfully! We will contact you soon.');
+        
+        // Reset form after success
+        setTimeout(() => {
+          onClose();
+          setSuccessMessage('');
+          setFormData({
+            name: '',
+            phone: '',
+            email: '',
+            address: '',
+            product: '',
+            quantity: '1',
+            instructions: ''
+          });
+        }, 3000);
+      } else {
+        setErrorMessage(data.message || 'Failed to place order. Please try again.');
+      }
+    } catch (error) {
+      console.error("Connection Error:", error);
+      setErrorMessage('Server connection failed. Is the backend running?');
+    } finally {
       setIsSubmitting(false);
-      setSuccessMessage('Order placed successfully! We will contact you soon.');
-      setTimeout(() => {
-        onClose();
-        setSuccessMessage('');
-        setFormData({
-          name: '',
-          phone: '',
-          email: '',
-          address: '',
-          product: '',
-          quantity: '1',
-          instructions: ''
-        });
-      }, 2000);
-    }, 1500);
+    }
   };
 
   if (!show) return null;
@@ -54,7 +79,7 @@ const OrderModal = ({ show, onClose, product }) => {
       <div className="modal-content">
         <button 
           className="position-absolute top-0 end-0 btn btn-link p-2 text-muted"
-          style={{ fontSize: '1.5rem' }}
+          style={{ fontSize: '1.5rem', textDecoration: 'none' }}
           onClick={onClose}
         >
           ×
@@ -62,11 +87,19 @@ const OrderModal = ({ show, onClose, product }) => {
 
         <h3 className="text-center mb-4 fw-semibold">Order Fresh A2 Milk</h3>
 
-        {successMessage ? (
+        {successMessage && (
           <div className="alert alert-success text-center">
             {successMessage}
           </div>
-        ) : (
+        )}
+
+        {errorMessage && (
+          <div className="alert alert-danger text-center">
+            {errorMessage}
+          </div>
+        )}
+
+        {!successMessage && (
           <form onSubmit={handleSubmit}>
             <input 
               type="text" 
