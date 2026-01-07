@@ -971,7 +971,7 @@ const GaudevaA2Milk = () => {
                 <h3 className="fw-bold" style={{ color: '#FF8C42' }}>GauVeda</h3>
               </div>
               <p className="opacity-75 mb-4">
-                Premium A2 milk from indigenous Gir cows, delivered fresh to your doorstep daily.
+                 Gir cows, delivered fresh to your doorstep daily.
               </p>
               <div className="mb-3">
                 <strong className="d-block mb-2">Address:</strong>

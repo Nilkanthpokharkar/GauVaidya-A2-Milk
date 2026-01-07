@@ -40,3 +40,40 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* Logo Styling (Use a highly specific selector if needed, like .navbar-custom .navbar-brand) */
+.navbar-brand {
+    /* Ensures the logo is vertically centered with the menu items */
+    display: flex; 
+    align-items: center;
+    /* Removes default vertical padding from the link container */
+    padding-top: 0 !important; 
+    padding-bottom: 0 !important;
+}
+
+.logo-image {
+    /* Ensures the specified height is respected */
+    height: 90px;
+    width: auto;
+    display: block;
+}
+
+/* Optional: Adjust the overall Navbar padding if the 90px logo makes it too tall */
+.navbar-custom {
+    padding-top: 5px; 
+    padding-bottom: 5px;
+    transition: all 0.3s ease; 
+}
+
+/* Scrolling effect CSS (If you haven't defined these already) */
+.navbar-scrolled {
+    /* Example styling when scrolled down */
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-scrolled .logo-image {
+    /* Optional: Make the logo slightly smaller when scrolled */
+    height: 60px; 
+}

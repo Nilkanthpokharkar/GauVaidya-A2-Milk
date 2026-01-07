@@ -1,396 +1,448 @@
-import React, { useState } from 'react';
+// src/pages/Home.jsx
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaWhatsapp, FaHeart, FaBrain, FaShieldAlt, FaBone, FaLeaf, FaBolt, FaChild, FaMoon, FaSmile } from 'react-icons/fa';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { FaWhatsapp, FaTruck, FaLeaf, FaAward, FaHeart, FaShoppingCart, FaChevronRight, FaStar, FaPlay, FaCheck } from 'react-icons/fa';
 import OrderModal from '../components/OrderModal';
 
 const Home = () => {
   const [showForm, setShowForm] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-rotate hero slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === 2 ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const benefits = [
+    { 
+      icon: <FaHeart className="benefit-icon" />, 
+      title: 'Good for Health', 
+      desc: 'Rich in nutrients that support overall health',
+      color: '#e74c3c'
+    },
+    { 
+      icon: <FaLeaf className="benefit-icon" />, 
+      title: '100% Organic', 
+      desc: 'No artificial additives or preservatives',
+      color: '#2ecc71'
+    },
+    { 
+      icon: <FaAward className="benefit-icon" />, 
+      title: 'Premium Quality', 
+      desc: 'Sourced from healthy Gir cows',
+      color: '#f39c12'
+    },
+    { 
+      icon: <FaTruck className="benefit-icon" />, 
+      title: 'Fresh Delivery', 
+      desc: 'Delivered fresh to your doorstep daily',
+      color: '#3498db'
+    }
+  ];
+
+  const products = [
+    { 
+      name: 'A2 Fresh Milk', 
+      price: '₹50', 
+      quantity: '500ml bottle', 
+      description: 'Fresh A2 milk delivered daily. Rich in natural proteins.',
+      icon: '🥛',
+      badge: 'Best Seller'
+    },
+    { 
+      name: 'A2 Cow Ghee', 
+      price: '₹850', 
+      quantity: '500ml jar', 
+      description: 'Pure A2 cow ghee made using traditional bilona method.',
+      icon: '🧈',
+      badge: 'Traditional'
+    },
+    { 
+      name: 'A2 Paneer', 
+      price: '₹180', 
+      quantity: '250g pack', 
+      description: 'Fresh homemade paneer from pure A2 milk.',
+      icon: '🧀',
+      badge: 'Fresh'
+    },
+  ];
+
+  const testimonials = [
+    { 
+      text: "The taste of GouVaidya A2 milk is incredible! My kids love it and I feel confident giving them the purest milk.",
+      name: "Priya Sharma", 
+      location: "Mumbai", 
+      rating: 5
+    },
+    { 
+      text: "After switching to A2 milk from GouVaidya, my digestion issues have completely resolved. The quality is outstanding!",
+      name: "Rajesh Patel", 
+      location: "Pune", 
+      rating: 5
+    },
+    { 
+      text: "As someone who was lactose intolerant, A2 milk has been a game-changer. GouVaidya's milk is pure and fresh.",
+      name: "Anita Desai", 
+      location: "Surat", 
+      rating: 5
+    }
+  ];
+
+  const heroSlides = [
+    {
+      title: "Pure A2 Milk from Happy Gir Cows",
+      subtitle: "Experience the finest quality A2 milk, naturally rich in protein and nutrients",
+      highlight: "100% Organic"
+    },
+    {
+      title: "Traditional Farming, Modern Health",
+      subtitle: "Sourced from indigenous Gir cows using ethical and sustainable practices",
+      highlight: "Farm Fresh"
+    },
+    {
+      title: "Delivered Fresh to Your Doorstep",
+      subtitle: "From our farm to your table within hours of milking",
+      highlight: "Daily Delivery"
+    }
+  ];
 
   return (
     <>
-      <LoadingSpinner />
-      
-      {/* Hero Section */}
-      <section className="hero-section" id="home">
-        <div className="hero-content">
-          <div className="row align-items-center">
-            <div className="col-lg-6 mb-5 mb-lg-0">
-              <h1 className="hero-title">
-                Pure <span className="hero-gradient-text">Organic A2 Milk</span> from Happy Gir Cows
-              </h1>
-              <p className="hero-subtitle">
-                Experience the finest quality A2 milk, naturally rich in protein and nutrients, delivered fresh to your doorstep daily.
-              </p>
-              <div className="cta-form">
-                <input 
-                  type="tel" 
-                  className="cta-input" 
-                  placeholder="+91 93226 04350" 
-                />
-                <button
-                  className="cta-button"
-                  onClick={() => setShowForm(true)}
-                >
-                  <FaWhatsapp size={24} color="white" />
-                </button>
+{/* Hero Section with Milk-Themed Slideshow */}
+<section className="hero-section">
+  <div className="hero-background">
+    {/* Milk splash background elements */}
+    <div className="milk-splash milk-splash-1"></div>
+    <div className="milk-splash milk-splash-2"></div>
+    <div className="milk-splash milk-splash-3"></div>
+    <div className="milk-bubble milk-bubble-1"></div>
+    <div className="milk-bubble milk-bubble-2"></div>
+    <div className="milk-bubble milk-bubble-3"></div>
+  </div>
+  
+  <div className="hero-slides" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+    {heroSlides.map((slide, index) => (
+      <div key={index} className="hero-slide">
+        <div className="container">
+          <div className="row align-items-center min-vh-100">
+            <div className="col-lg-6">
+              <div className="hero-content">
+                <div className="hero-badge mb-3">
+                  <span className="badge bg-warning text-dark px-3 py-2">{slide.highlight}</span>
+                </div>
+                <h1 className="hero-title">
+                  {slide.title}
+                </h1>
+                <p className="hero-subtitle mb-4">
+                  {slide.subtitle}
+                </p>
+                <div className="d-flex flex-column flex-sm-row gap-3">
+                  <Link to="/products" className="btn btn-warning btn-lg px-4 py-3 hero-btn">
+                    <FaShoppingCart className="me-2" /> Explore Products
+                  </Link>
+                  <button 
+                    className="btn btn-success btn-lg px-4 py-3 hero-btn"
+                    onClick={() => setShowForm(true)}
+                  >
+                    <FaWhatsapp className="me-2" /> Order on WhatsApp
+                  </button>
+                </div>
+                
+                {/* Milk quality indicators */}
+                <div className="milk-indicators mt-5">
+                  <div className="d-flex align-items-center mb-2">
+                    <div className="milk-check-icon me-2">
+                      <FaCheck />
+                    </div>
+                    <span>100% Pure A2 Protein</span>
+                  </div>
+                  <div className="d-flex align-items-center mb-2">
+                    <div className="milk-check-icon me-2">
+                      <FaCheck />
+                    </div>
+                    <span>No Preservatives or Additives</span>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <div className="milk-check-icon me-2">
+                      <FaCheck />
+                    </div>
+                    <span>Farm Fresh Daily Delivery</span>
+                  </div>
+                </div>
               </div>
-              <p className="text-muted">
-                Call us for instant delivery. <Link to="/order-now" className="text-decoration-none fw-semibold" style={{ color: '#FF8C42' }}>Order Now!</Link>
-              </p>
             </div>
             <div className="col-lg-6">
-              <div className="hero-illustration">
-                <div style={{ marginBottom: '20px' }}>
-                  <img 
-                    src="./images/gir.png" 
-                    alt="GirCow" 
-                    style={{ width: '12rem', height: '12rem', objectFit: 'contain' }} 
-                  />
-                </div>
-                <h3 className="text-center mb-3 fw-bold" style={{ color: '#2C3E50' }}>Premium Gir Cow Milk</h3>
-                <p className="text-center text-muted">Fresh, pure, and naturally rich A2 milk from our beloved Gir cows</p>
-                
-                <div style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '2rem', opacity: '0.3' }}>🌱</div>
-                <div style={{ position: 'absolute', bottom: '20px', left: '20px', fontSize: '2rem', opacity: '0.3' }}>🥛</div>
+              <div className="hero-image text-center position-relative">
+                <div className="hero-image-container">
+  {/* 
+    ACTUAL MILK BOTTLE IMAGE 
+    The path "/images/bottle.png" points to the public/images folder
+  */}
+  {/* <img 
+    src="public/images/image2.png" 
+    alt="GouVaidya A2 Milk Bottle" 
+    className="img-fluid milk-bottle-image"
+  /> */}
+  
+  {/* Tagline from the screenshot */}
+  {/* <div className="product-tagline mt-4">
+    <h3 className="text-warning fw-bold">safer. healthier. better.</h3>
+  </div>
+   */}
+  {/* Floating badge */}
+  {/* <div className="floating-badge">
+    <span className="badge bg-success text-white p-2">Since 2010</span>
+  </div> */}
+  
+  {/* Optional: Keep the milk drops animation for extra visual effect */}
+  {/* <div className="milk-drops">
+    <div className="milk-drop milk-drop-1"></div>
+    <div className="milk-drop milk-drop-2"></div>
+    <div className="milk-drop milk-drop-3"></div>
+  </div> */}
+</div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  {/* Slide Indicators */}
+  <div className="hero-indicators">
+    {heroSlides.map((_, index) => (
+      <button 
+        key={index} 
+        className={`indicator ${currentSlide === index ? 'active' : ''}`}
+        onClick={() => setCurrentSlide(index)}
+      />
+    ))}
+  </div>
+</section>
+      {/* Stats Section */}
+      <section className="py-5 bg-white">
+        <div className="container">
+          <div className="row text-center">
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stat-item">
+                <h2 className="text-warning">5000+</h2>
+                <p className="text-muted">Happy Customers</p>
+              </div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stat-item">
+                <h2 className="text-warning">100%</h2>
+                <p className="text-muted">Organic Products</p>
+              </div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stat-item">
+                <h2 className="text-warning">24h</h2>
+                <p className="text-muted">Fresh Delivery</p>
+              </div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stat-item">
+                <h2 className="text-warning">12+</h2>
+                <p className="text-muted">Years Experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          {/* Benefits */}
-          <div className="text-center mt-5 pt-5">
-            <p className="fs-5 text-muted mb-4">
-              Trusted by <span className="fw-bold fs-4" style={{ color: '#FF8C42' }}>5000+</span> families for healthier living
-            </p>
-            <div className="row justify-content-center">
-              {[
-                { icon: '💪', title: 'Rich in Protein', desc: 'High quality protein for muscle health', color: '#4CAF50' },
-                { icon: '🦴', title: 'Strong Bones', desc: 'Natural calcium for bone strength', color: '#FF8C42' },
-                { icon: '💚', title: 'Easy Digestion', desc: 'A2 protein is gentle on stomach', color: '#9C27B0' },
-                { icon: '🌿', title: '100% Natural', desc: 'No artificial additives or hormones', color: '#2196F3' },
-                { icon: '🏠', title: 'Farm Fresh', desc: 'Directly from our organic farm', color: '#FF5722' },
-              ].map((benefit, index) => (
-                <div className="col-6 col-md-4 col-lg-2 mb-4" key={index}>
-                  <div className="benefit-item">
-                    <div className="benefit-icon" style={{ background: benefit.color }}>
+      {/* Benefits Section */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h6 className="text-warning text-uppercase fw-bold mb-2">Why Choose Us</h6>
+            <h2 className="section-title">Why <span className="text-warning">GouVaidya</span> A2 Milk?</h2>
+            <p className="lead text-muted">Discover the benefits of pure A2 milk from indigenous Gir cows</p>
+          </div>
+          
+          <div className="row g-4">
+            {benefits.map((benefit, index) => (
+              <div className="col-md-6 col-lg-3" key={index}>
+                <div className="card h-100 border-0 shadow-sm benefit-card">
+                  <div className="card-body text-center p-4">
+                    <div className="benefit-icon-wrapper mb-3" style={{ backgroundColor: benefit.color }}>
                       {benefit.icon}
                     </div>
-                    <h6 className="fw-semibold mb-2">{benefit.title}</h6>
-                    <small className="text-muted">{benefit.desc}</small>
+                    <h5 className="card-title fw-bold">{benefit.title}</h5>
+                    <p className="card-text text-muted">{benefit.desc}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="full-width-section" style={{ background: 'linear-gradient(135deg, #f8f9fa, #e9ecef)' }}>
-        <div className="section-content">
+      {/* Products Preview */}
+      <section className="py-5">
+        <div className="container">
           <div className="text-center mb-5">
-            <h6 className="section-subtitle" style={{ color: '#FF8C42', fontWeight: '600', textTransform: 'uppercase' }}>Why Choose Us</h6>
-            <h2 className="section-title mb-4">
-              <span className="hero-gradient-text">A2 DESI GIR COW MILK</span>
-            </h2>
-            <p className="fs-5 text-muted mx-auto" style={{ maxWidth: '600px' }}>
-              Experience the difference with our premium A2 milk from indigenous Gir cows
-            </p>
+            <h6 className="text-warning text-uppercase fw-bold mb-2">Our Products</h6>
+            <h2 className="section-title">Our Premium <span className="text-warning">A2 Milk</span> Products</h2>
+            <p className="lead text-muted">Explore our range of pure A2 milk products</p>
           </div>
-
+          
           <div className="row g-4">
-            {[
-              {
-                icon: '🐄',
-                iconBg: '#FF8C42',
-                title: 'Love for Cows',
-                description: 'Milking and non-milking cows are treated with equal care. Around 25% cows are non-milking. All calves are fully fed.'
-              },
-              {
-                icon: '🌾',
-                iconBg: '#FF8C42',
-                title: 'Free Range Cows',
-                description: 'Our gir cows are left in open land for freely grazing. They are not kept tied in shed as other cows are.'
-              },
-              {
-                icon: '🚫',
-                iconBg: '#FF8C42',
-                title: 'No Hormonal Injections',
-                description: 'The Gir cow breeds are ethnic breeds so they dont need any hormonal injections for milk as other non-Indian breeds need.'
-              },
-              {
-                icon: '🚚',
-                iconBg: '#FF8C42',
-                title: 'Delivered within 24 hrs',
-                description: 'Milk is delivered from farm to your home within 24 hrs of milking.'
-              },
-              {
-                icon: '💊',
-                iconBg: '#FF8C42',
-                title: 'No Antibiotics',
-                description: 'The Gir cows have very high immunity so no vets or antibiotics are required, resulting the milk to be antibiotic free.'
-              },
-              {
-                icon: '🥛',
-                iconBg: '#FF8C42',
-                title: 'Pure A2 Protein',
-                description: 'Our Gir cows naturally produce A2 beta-casein protein which is easier to digest and more nutritious than regular milk.'
-              }
-            ].map((feature, index) => (
-              <div className="col-lg-4 col-md-6 mb-4" key={index}>
-                <div className="why-choose-card h-100" style={{ 
-                  background: 'white', 
-                  borderRadius: '20px', 
-                  padding: '2rem', 
-                  textAlign: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  border: 'none'
-                }}>
-                  <div 
-                    className="feature-icon d-flex align-items-center justify-content-center mx-auto mb-3" 
-                    style={{
-                      width: '80px',
-                      height: '80px',
-                      borderRadius: '50%',
-                      background: `linear-gradient(135deg, ${feature.iconBg}, ${feature.iconBg}dd)`,
-                      fontSize: '2rem',
-                      color: 'white',
-                      boxShadow: '0 8px 25px rgba(255, 140, 66, 0.3)'
-                    }}
-                  >
-                    {feature.icon}
+            {products.map((product, index) => (
+              <div className="col-md-4" key={index}>
+                <div className="card h-100 border-0 shadow-sm product-card">
+                  <div className="card-badge">
+                    <span className="badge bg-warning">{product.badge}</span>
                   </div>
-                  <h5 className="fw-bold mb-3" style={{ color: '#2C3E50' }}>{feature.title}</h5>
-                  <p className="text-muted mb-0" style={{ lineHeight: '1.6' }}>{feature.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Health Benefits Section - Redesigned to match existing UI */}
-      <section className="full-width-section" style={{ background: 'white' }}>
-        <div className="section-content">
-          <div className="text-center mb-5">
-            <h6 className="section-subtitle" style={{ color: '#4CAF50', fontWeight: '600', textTransform: 'uppercase' }}>Health Benefits</h6>
-            <h2 className="section-title mb-4">
-              Why <span className="hero-gradient-text">Gir Cow A2 Milk</span> is Better for You
-            </h2>
-            <p className="fs-5 text-muted mx-auto" style={{ maxWidth: '700px' }}>
-              Discover the scientifically proven health advantages of pure A2 milk from indigenous Gir cows
-            </p>
-          </div>
-
-          <div className="row g-4">
-            {[
-              {
-                icon: <FaBrain size={28} />,
-                title: 'Brain Development',
-                description: 'Rich in Omega-3 fatty acids that enhance cognitive function and improve memory',
-                color: '#2196F3'
-              },
-              {
-                icon: <FaShieldAlt size={28} />,
-                title: 'Strong Immunity',
-                description: 'High immunoglobin content with natural antibodies that boost disease resistance',
-                color: '#FF9800'
-              },
-              {
-                icon: <FaHeart size={28} />,
-                title: 'Heart Health',
-                description: 'Helps maintain balanced cholesterol levels and improves cardiovascular function',
-                color: '#F44336'
-              },
-              {
-                icon: <FaBone size={28} />,
-                title: 'Bone Strength',
-                description: 'High calcium absorption with natural Vitamin D for stronger bones and teeth',
-                color: '#4CAF50'
-              },
-              {
-                icon: <FaLeaf size={28} />,
-                title: 'Easy Digestion',
-                description: 'A2 protein is gentle on stomach, reduces bloating and suitable for lactose sensitivity',
-                color: '#8BC34A'
-              },
-              {
-                icon: <FaBolt size={28} />,
-                title: 'Natural Energy',
-                description: 'Provides sustained energy release with essential nutrients for active lifestyle',
-                color: '#FFC107'
-              }
-            ].map((benefit, index) => (
-              <div className="col-lg-4 col-md-6 mb-4" key={index}>
-                <div className="benefit-card h-100" style={{ 
-                  background: 'white', 
-                  borderRadius: '20px', 
-                  padding: '2rem', 
-                  textAlign: 'center',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                  border: 'none'
-                }}>
-                  <div 
-                    className="benefit-icon-main d-flex align-items-center justify-content-center mx-auto mb-4" 
-                    style={{
-                      width: '80px',
-                      height: '80px',
-                      borderRadius: '50%',
-                      background: `linear-gradient(135deg, ${benefit.color}, ${benefit.color}dd)`,
-                      color: 'white',
-                      boxShadow: `0 8px 25px ${benefit.color}40`
-                    }}
-                  >
-                    {benefit.icon}
-                  </div>
-                  <h5 className="fw-bold mb-3" style={{ color: '#2C3E50' }}>{benefit.title}</h5>
-                  <p className="text-muted mb-0" style={{ lineHeight: '1.6' }}>{benefit.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Additional Benefits in Grid Style */}
-          <div className="row mt-5">
-            <div className="col-lg-6">
-              <div className="additional-benefits" style={{ background: 'linear-gradient(135deg, #f8f9fa, #ffffff)', borderRadius: '15px', padding: '2rem' }}>
-                <h4 className="fw-bold mb-4" style={{ color: '#2C3E50' }}>Additional Benefits</h4>
-                <div className="row">
-                  {[
-                    { icon: <FaChild size={20} />, text: 'Ideal for children growth and development' },
-                    { icon: <FaMoon size={20} />, text: 'Promotes better sleep and relaxation' },
-                    { icon: <FaSmile size={20} />, text: 'Improves skin health and natural glow' },
-                    { icon: <FaLeaf size={20} />, text: '100% natural with no artificial additives' }
-                  ].map((item, index) => (
-                    <div className="col-12 mb-3" key={index}>
-                      <div className="d-flex align-items-center">
-                        <span style={{ color: '#4CAF50', marginRight: '15px' }}>{item.icon}</span>
-                        <span style={{ color: '#555' }}>{item.text}</span>
-                      </div>
+                  <div className="card-body text-center p-4">
+                    <div className="product-icon mb-3">
+                      <span style={{ fontSize: '3rem' }}>{product.icon}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="nutrition-facts" style={{ background: 'linear-gradient(135deg, #FF8C4210, #4CAF5020)', borderRadius: '15px', padding: '2rem', height: '100%' }}>
-                <h4 className="fw-bold mb-4" style={{ color: '#2C3E50' }}>Nutritional Superiority</h4>
-                <div className="nutrition-grid">
-                  {[
-                    { nutrient: 'A2 Protein', value: '100% Pure', color: '#4CAF50' },
-                    { nutrient: 'Omega-3', value: '2-3x Higher', color: '#2196F3' },
-                    { nutrient: 'Calcium', value: 'Better Absorption', color: '#FF9800' },
-                    { nutrient: 'Anti-oxidants', value: 'Rich Source', color: '#9C27B0' }
-                  ].map((item, index) => (
-                    <div key={index} className="text-center mb-4">
-                      <div className="fw-bold fs-5 mb-1" style={{ color: item.color }}>{item.value}</div>
-                      <div className="text-muted small">{item.nutrient}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="text-center mt-3">
-                  <small className="text-muted">Compared to regular A1 milk</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products Preview */}
-      <section className="full-width-section" style={{ background: 'linear-gradient(135deg, #f8f9fa, #e9ecef)' }}>
-        <div className="section-content">
-          <div className="text-center mb-5">
-            <h6 className="section-subtitle">Featured Products</h6>
-            <h2 className="section-title">
-              Our Premium <span className="hero-gradient-text">A2 Milk</span> Collection
-            </h2>
-            <p className="fs-5 text-muted mx-auto" style={{ maxWidth: '600px' }}>
-              Discover our range of pure A2 milk products made from the finest Gir cow milk
-            </p>
-          </div>
-
-          <div className="row">
-            {[
-              { 
-                name: 'A2 Fresh Milk', 
-                price: '₹50', 
-                quantity: '500ml bottle', 
-                description: 'Fresh A2 milk delivered daily. Rich in natural proteins.',
-                icon: '🥛',
-                size: '500ml'
-              },
-              { 
-                name: 'A2 Cow Ghee', 
-                price: '₹2200', 
-                quantity: '500ml jar', 
-                description: 'Pure A2 cow ghee made using traditional bilona method.',
-                icon: '🧈',
-                size: 'Pure'
-              },
-              { 
-                name: 'A2 Paneer', 
-                price: '₹180', 
-                quantity: '250g pack', 
-                description: 'Fresh homemade paneer from pure A2 milk.',
-                icon: '🧀',
-                size: 'Fresh'
-              },
-            ].map((product, index) => (
-              <div className="col-lg-4 col-md-6 mb-4" key={index}>
-                <div className="product-card">
-                  <div className="product-image">
-                    <div style={{ fontSize: '4rem', marginBottom: '10px' }}>{product.icon}</div>
-                    <div style={{ fontSize: '1.2rem', fontWeight: '600', color: '#2C3E50' }}>{product.size}</div>
+                    <h5 className="card-title fw-bold">{product.name}</h5>
+                    <h4 className="text-warning mb-2">{product.price}</h4>
+                    <p className="text-muted mb-3">{product.quantity}</p>
+                    <p className="card-text">{product.description}</p>
+                    <button 
+                      className="btn btn-warning mt-3"
+                      onClick={() => setShowForm(true)}
+                    >
+                      Order Now <FaChevronRight className="ms-1" size={12} />
+                    </button>
                   </div>
-                  <h4 className="fw-semibold mb-2">{product.name}</h4>
-                  <div className="fs-4 fw-bold mb-2" style={{ color: '#FF8C42' }}>{product.price}</div>
-                  <div className="text-muted mb-3">{product.quantity}</div>
-                  <p className="text-muted mb-4">{product.description}</p>
-                  <Link 
-                    to="/products" 
-                    className="btn w-100 fw-semibold text-white text-decoration-none"
-                    style={{ background: '#4CAF50', borderRadius: '25px' }}
-                  >
-                    View Details
-                  </Link>
                 </div>
               </div>
             ))}
           </div>
-
-          <div className="text-center mt-4">
-            <Link to="/products" className="btn order-btn">
-              View All Products
+          
+          <div className="text-center mt-5">
+            <Link to="/products" className="btn btn-outline-warning btn-lg px-4">
+              View All Products <FaChevronRight className="ms-2" size={12} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="full-width-section text-white" style={{ background: 'linear-gradient(135deg, #FF8C42, #FFB366)' }}>
-        <div className="section-content text-center">
+      {/* Process Section */}
+      <section className="py-5 bg-light">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h6 className="text-warning text-uppercase fw-bold mb-2">Our Process</h6>
+            <h2 className="section-title">From <span className="text-warning">Farm</span> to <span className="text-warning">Table</span></h2>
+            <p className="lead text-muted">How we ensure the freshest A2 milk reaches you</p>
+          </div>
+          
           <div className="row">
-            <div className="col-lg-8 mx-auto">
-              <h2 className="display-5 fw-bold mb-4">Start Your Healthy Journey Today</h2>
-              <p className="fs-5 mb-4 opacity-75">
-                Experience the purity and goodness of A2 milk from our beloved Gir cows. Order now and taste the difference!
-              </p>
-              <Link
-                to="/order-now"
-                className="btn btn-light btn-lg px-5 py-3 fw-bold text-decoration-none"
-                style={{ color: '#FF8C42', borderRadius: '50px' }}
-              >
-                Order Fresh A2 Milk Now
-              </Link>
-              <div className="mt-3 opacity-75">
-                <small>Free delivery within Pune radius • Fresh daily supply</small>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="process-item text-center">
+                <div className="process-icon-wrapper mb-3">
+                  <div className="process-icon">1</div>
+                </div>
+                <h5 className="fw-bold">Ethical Farming</h5>
+                <p className="text-muted small">Happy cows raised with love and care</p>
+              </div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="process-item text-center">
+                <div className="process-icon-wrapper mb-3">
+                  <div className="process-icon">2</div>
+                </div>
+                <h5 className="fw-bold">Daily Milking</h5>
+                <p className="text-muted small">Fresh milk collected every morning</p>
+              </div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="process-item text-center">
+                <div className="process-icon-wrapper mb-3">
+                  <div className="process-icon">3</div>
+                </div>
+                <h5 className="fw-bold">Quality Testing</h5>
+                <p className="text-muted small">Rigorous quality checks at every step</p>
+              </div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="process-item text-center">
+                <div className="process-icon-wrapper mb-3">
+                  <div className="process-icon">4</div>
+                </div>
+                <h5 className="fw-bold">Home Delivery</h5>
+                <p className="text-muted small">At your doorstep within 24 hours</p>
               </div>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Testimonial Preview */}
+      <section className="py-5">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h6 className="text-warning text-uppercase fw-bold mb-2">Testimonials</h6>
+            <h2 className="section-title">What Our <span className="text-warning">Customers</span> Say</h2>
+            <p className="lead text-muted">Hear from families who trust GouVaidya</p>
+          </div>
+          
+          <div className="row">
+            {testimonials.map((testimonial, index) => (
+              <div className="col-lg-4 mb-4" key={index}>
+                <div className="card h-100 border-0 shadow-sm testimonial-card">
+                  <div className="card-body p-4">
+                    <div className="mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <FaStar key={i} className="text-warning" />
+                      ))}
+                    </div>
+                    <p className="card-text fst-italic">"{testimonial.text}"</p>
+                    <div className="d-flex align-items-center mt-3">
+                      <div className="testimonial-avatar me-3">
+                        <div className="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                          {testimonial.name.charAt(0)}
+                        </div>
+                      </div>
+                      <div>
+                        <h6 className="mb-0 fw-semibold">{testimonial.name}</h6>
+                        <small className="text-muted">{testimonial.location}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-4">
+            <Link to="/reviews" className="btn btn-outline-warning btn-lg px-4">
+              Read More Reviews <FaChevronRight className="ms-2" size={12} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-5 bg-warning text-white position-relative overflow-hidden">
+        <div className="container position-relative">
+          <div className="row align-items-center">
+            <div className="col-lg-8">
+              <h2 className="mb-3 fw-bold">Start Your Healthy Journey Today</h2>
+              <p className="lead mb-0">Experience the purity and goodness of A2 milk from our beloved Gir cows.</p>
+              <ul className="list-unstyled mt-3">
+                <li className="mb-2"><FaCheck className="me-2" /> 100% Pure A2 Milk</li>
+                <li className="mb-2"><FaCheck className="me-2" /> No Artificial Additives</li>
+                <li><FaCheck className="me-2" /> Farm Fresh Daily Delivery</li>
+              </ul>
+            </div>
+            <div className="col-lg-4 text-lg-end mt-3 mt-lg-0">
+              <Link to="/order-now" className="btn btn-light btn-lg px-4 py-3">
+                Order Fresh A2 Milk Now <FaChevronRight className="ms-2" size={12} />
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className="cta-shape-1"></div>
+        <div className="cta-shape-2"></div>
       </section>
 
       {/* Order Modal */}

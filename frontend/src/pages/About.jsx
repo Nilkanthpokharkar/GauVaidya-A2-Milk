@@ -1,16 +1,14 @@
+// src/pages/About.js
 import React from 'react';
 
 const About = () => {
   return (
-    <section className="full-width-section" style={{ background: '#FFF8F0', minHeight: '100vh', paddingTop: '100px' }}>
-      <div className="section-content">
+    <div className="py-5">
+      <div className="container">
         <div className="text-center mb-5">
-          <h6 className="section-subtitle">About GauVeda</h6>
-          <h2 className="section-title">
-            Our Story of <span className="hero-gradient-text">Pure A2 Milk</span>
-          </h2>
-          <p className="fs-5 text-muted mx-auto" style={{ maxWidth: '700px' }}>
-            Gaudeva is committed to providing the purest A2 milk from indigenous Gir cows, raised with love and care in our organic farm. 
+          <h1 className="section-title">Our Story of <span className="text-warning">Pure A2 Milk</span></h1>
+          <p className="lead text-muted mx-auto" style={{ maxWidth: '700px' }}>
+            GouVaidya is committed to providing the purest A2 milk from indigenous Gir cows, raised with love and care in our organic farm. 
             We believe in sustainable farming and delivering nature's goodness directly to your home.
           </p>
         </div>
@@ -18,27 +16,31 @@ const About = () => {
         {/* Mission & Vision */}
         <div className="row mb-5">
           <div className="col-lg-6 mb-4">
-            <div className="product-card h-100">
-              <div className="text-center mb-4">
-                <div className="benefit-icon mx-auto" style={{ background: '#4CAF50', fontSize: '2.5rem' }}>🎯</div>
+            <div className="card h-100 border-0 shadow-sm">
+              <div className="card-body text-center">
+                <div className="benefit-icon-wrapper mx-auto mb-4" style={{ background: '#4CAF50' }}>
+                  🎯
+                </div>
+                <h3 className="card-title mb-3">Our Mission</h3>
+                <p className="card-text">
+                  To provide 100% pure A2 milk from indigenous Gir cows while promoting sustainable farming practices 
+                  and contributing to the health and well-being of our community.
+                </p>
               </div>
-              <h3 className="text-center fw-bold mb-3">Our Mission</h3>
-              <p className="text-muted fs-5">
-                To provide 100% pure A2 milk from indigenous Gir cows while promoting sustainable farming practices 
-                and contributing to the health and well-being of our community.
-              </p>
             </div>
           </div>
           <div className="col-lg-6 mb-4">
-            <div className="product-card h-100">
-              <div className="text-center mb-4">
-                <div className="benefit-icon mx-auto" style={{ background: '#FF8C42', fontSize: '2.5rem' }}>👁️</div>
+            <div className="card h-100 border-0 shadow-sm">
+              <div className="card-body text-center">
+                <div className="benefit-icon-wrapper mx-auto mb-4" style={{ background: '#FF8C42' }}>
+                  👁️
+                </div>
+                <h3 className="card-title mb-3">Our Vision</h3>
+                <p className="card-text">
+                  To become the most trusted A2 milk brand in India, known for purity, quality, and commitment 
+                  to animal welfare and environmental sustainability.
+                </p>
               </div>
-              <h3 className="text-center fw-bold mb-3">Our Vision</h3>
-              <p className="text-muted fs-5">
-                To become the most trusted A2 milk brand in India, known for purity, quality, and commitment 
-                to animal welfare and environmental sustainability.
-              </p>
             </div>
           </div>
         </div>
@@ -46,74 +48,119 @@ const About = () => {
         {/* Feature Blocks */}
         <div className="row align-items-center mb-5">
           <div className="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <div className="feature-illustration">
-              <div style={{ fontSize: '8rem', marginBottom: '10px' }}>🐄</div>
-              <h4 className="text-center fw-bold" style={{ color: '#2C3E50' }}>Happy Gir Cows</h4>
+            <div className="text-center">
+              <img 
+                src="/images/happy-cows.jpg" 
+                alt="Happy Gir Cows" 
+                className="img-fluid rounded-3 shadow"
+              />
             </div>
           </div>
           <div className="col-lg-5 order-lg-1">
-            <h6 className="section-subtitle text-start">Indigenous Breed</h6>
-            <h3 className="fw-bold mb-3 text-start">Pure Gir Cow Breed</h3>
-            <p className="fs-5 text-muted">
+            <h6 className="text-warning mb-2">Indigenous Breed</h6>
+            <h3 className="mb-3">Pure Gir Cow Breed</h3>
+            <p className="lead text-muted mb-4">
               Our indigenous Gir cows are known for producing the finest A2 milk. These native Indian cows 
               are naturally suited to our climate and produce milk that's easier to digest and more nutritious.
             </p>
-            <ul className="fs-5 text-muted">
-              <li>Native Indian breed with superior genetics</li>
-              <li>Naturally produces A2 beta-casein protein</li>
-              <li>Well-adapted to Indian climate conditions</li>
-              <li>Known for their gentle temperament</li>
+            <ul className="list-unstyled">
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Native Indian breed with superior genetics
+              </li>
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Naturally produces A2 beta-casein protein
+              </li>
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Well-adapted to Indian climate conditions
+              </li>
+              <li className="d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Known for their gentle temperament
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="row align-items-center mb-5">
           <div className="col-lg-6 mb-4 mb-lg-0">
-            <div className="feature-illustration" style={{ background: 'linear-gradient(135deg, #90EE90, #98FB98)' }}>
-              <div style={{ fontSize: '8rem', marginBottom: '10px' }}>🌱</div>
-              <h4 className="text-center fw-bold" style={{ color: '#2C3E50' }}>Organic Farm</h4>
+            <div className="text-center">
+              <img 
+                src="/images/organic-farm.jpg" 
+                alt="Organic Farm" 
+                className="img-fluid rounded-3 shadow"
+              />
             </div>
           </div>
           <div className="col-lg-5 offset-lg-1">
-            <h6 className="section-subtitle text-start">Organic Farming</h6>
-            <h3 className="fw-bold mb-3 text-start">Natural & Organic Process</h3>
-            <p className="fs-5 text-muted">
+            <h6 className="text-warning mb-2">Organic Farming</h6>
+            <h3 className="mb-3">Natural & Organic Process</h3>
+            <p className="lead text-muted mb-4">
               Our cows graze on pesticide-free pastures and are fed only natural, organic fodder. 
               We believe in sustainable farming practices that keep both our cows and the environment healthy.
             </p>
-            <ul className="fs-5 text-muted">
-              <li>Chemical-free grazing pastures</li>
-              <li>Organic fodder and feed</li>
-              <li>No artificial growth hormones</li>
-              <li>Ethical treatment of animals</li>
+            <ul className="list-unstyled">
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Chemical-free grazing pastures
+              </li>
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Organic fodder and feed
+              </li>
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                No artificial growth hormones
+              </li>
+              <li className="d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Ethical treatment of animals
+              </li>
             </ul>
           </div>
         </div>
 
         <div className="row align-items-center">
           <div className="col-lg-6 order-lg-2 mb-4 mb-lg-0">
-            <div className="feature-illustration" style={{ background: 'linear-gradient(135deg, #87CEEB, #B0E0E6)' }}>
-              <div style={{ fontSize: '8rem', marginBottom: '10px' }}>🚚</div>
-              <h4 className="text-center fw-bold" style={{ color: '#2C3E50' }}>Fresh Delivery</h4>
+            <div className="text-center">
+              <img 
+                src="/images/fresh-delivery.jpg" 
+                alt="Fresh Delivery" 
+                className="img-fluid rounded-3 shadow"
+              />
             </div>
           </div>
           <div className="col-lg-5 order-lg-1">
-            <h6 className="section-subtitle text-start">Daily Delivery</h6>
-            <h3 className="fw-bold mb-3 text-start">Farm to Doorstep</h3>
-            <p className="fs-5 text-muted">
+            <h6 className="text-warning mb-2">Daily Delivery</h6>
+            <h3 className="mb-3">Farm to Doorstep</h3>
+            <p className="lead text-muted mb-4">
               We ensure our milk reaches you within hours of milking. Our cold chain delivery system 
               maintains freshness and quality from our farm directly to your doorstep every morning.
             </p>
-            <ul className="fs-5 text-muted">
-              <li>Morning milking and same-day delivery</li>
-              <li>Temperature-controlled transportation</li>
-              <li>Hygienic packaging</li>
-              <li>Free delivery within 10km radius</li>
+            <ul className="list-unstyled">
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Morning milking and same-day delivery
+              </li>
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Temperature-controlled transportation
+              </li>
+              <li className="mb-2 d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Hygienic packaging
+              </li>
+              <li className="d-flex align-items-center">
+                <span className="text-warning me-2">✓</span>
+                Free delivery within 10km radius
+              </li>
             </ul>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

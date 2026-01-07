@@ -1,3 +1,4 @@
+/* src/styles/style.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 * {
@@ -10,15 +11,48 @@ html, body {
   width: 100%;
   overflow-x: hidden;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #333;
 }
 
-/* Full Width Container Reset */
-.container-fluid {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  max-width: none;
-} 
+/* Main content area to prevent overlap with fixed navbar */
+.main-content {
+  margin-top: 80px; /* Adjust based on navbar height */
+  min-height: calc(100vh - 80px); /* Full viewport height minus navbar */
+}
+
+/* General Styling */
+.section-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.text-warning {
+  color: #FF8C42 !important;
+}
+
+.btn-warning {
+  background-color: #FF8C42;
+  border-color: #FF8C42;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #e67e22;
+  border-color: #e67e22;
+  color: white;
+}
+
+.btn-outline-warning {
+  color: #FF8C42;
+  border-color: #FF8C42;
+}
+
+.btn-outline-warning:hover {
+  background-color: #FF8C42;
+  border-color: #FF8C42;
+  color: white;
+}
 
 /* Navigation Styles */
 .navbar-custom {
@@ -94,23 +128,31 @@ html, body {
   color: white !important;
 }
 
-/* Hero Section - Full Screen */
-.hero-section {
-  width: 100vw;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #FFF8F0 0%, #FFF8DC 100%);
-  padding: 0;
-  margin: 0;
-  position: relative;
-  display: flex;
+/* Logo Styling */
+.navbar-brand {
+  display: flex; 
   align-items: center;
+  padding-top: 0 !important; 
+  padding-bottom: 0 !important;
 }
 
-.hero-content {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 120px 2rem 2rem;
+.logo-image {
+  height: 70px;
+  width: auto;
+  display: block;
+}
+
+.navbar-scrolled .logo-image {
+  height: 50px; 
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FFF8F0 0%, #FFF8DC 100%);
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .hero-title {
@@ -122,13 +164,6 @@ html, body {
   margin-bottom: 1.5rem;
 }
 
-.hero-gradient-text {
-  background: linear-gradient(135deg, #FF8C42, #FFB366);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .hero-subtitle {
   font-size: clamp(1rem, 3vw, 1.25rem);
   color: #555;
@@ -137,191 +172,57 @@ html, body {
   line-height: 1.6;
 }
 
-.cta-form {
-  background: white;
-  border-radius: 60px;
-  padding: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 450px;
-  display: flex;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
+.hero-image img {
+  max-height: 500px;
+  object-fit: contain;
 }
 
-.cta-form:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+/* Benefits Section */
+.benefit-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cta-input {
-  border: none;
-  padding: 18px 24px;
-  font-size: 16px;
-  outline: none;
-  background: transparent;
-  color: #2C3E50;
-  font-weight: 500;
-  flex: 1;
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
-.cta-input::placeholder {
-  color: #888;
-}
-
-.cta-button {
-  width: 56px;
-  height: 56px;
-  border: none;
-  background: linear-gradient(135deg, #FF8C42, #FFB366);
+.benefit-icon-wrapper {
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
-}
-
-.hero-illustration {
-  width: 100%;
-  max-width: 500px;
-  height: 400px;
-  background: linear-gradient(135deg, #FFF8DC, #F0E68C);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  font-size: 1.8rem;
+  color: white;
   margin: 0 auto;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .benefit-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: white;
-  margin: 0 auto 1rem;
-  transition: all 0.3s ease;
+  font-size: 1.8rem;
 }
 
-.benefit-item {
-  text-align: center;
-  padding: 1rem;
-  transition: all 0.3s ease;
-}
-
-.benefit-item:hover {
-  transform: translateY(-5px);
-}
-
-/* Sections Full Width */
-.full-width-section {
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-}
-
-.section-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 5rem 2rem;
-}
-
-.section-title {
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 700;
-  color: #2C3E50;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.section-subtitle {
-  color: #FF8C42;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
+/* Products Section */
 .product-card {
-  background: white;
-  border-radius: 24px;
-  padding: 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #FFF8F0 0%, #ffffff 100%);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
-.product-image {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 1.5rem;
-  border-radius: 15px;
-  background: linear-gradient(135deg, #FFF8DC, #F9F9F9);
+.product-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 140, 66, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
-}
-
-.feature-illustration {
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
-  background: linear-gradient(135deg, #FFF8DC, #F0E68C);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-}
-
-.testimonial-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: all 0.3s ease;
-  min-width: 350px;
-  flex-shrink: 0;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.testimonial-ribbon {
-  position: absolute;
-  top: 0;
-  left: 2rem;
-  width: 5px;
-  height: 80px;
-  border-radius: 3px;
 }
 
 /* Mobile Menu */
@@ -380,374 +281,985 @@ html, body {
   border-radius: 12px;
   padding: 2rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   position: relative;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.form-input {
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
+/* Footer */
+.footer {
+  background: #2C3E50;
+  color: #fff;
+  padding: 3rem 0 1rem;
+  position: relative;
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: #FF8C42;
+.footer a {
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.3s ease;
 }
 
-.form-submit {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #FF8C42, #FFB366);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
+.footer a:hover {
+  color: #FF8C42;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  margin-right: 10px;
   transition: all 0.3s ease;
 }
 
-.form-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 140, 66, 0.4);
+.social-links a:hover {
+  background: #FF8C42;
+  transform: translateY(-3px);
 }
 
-/* Scroll Top Button */
-.scroll-top-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 55px;
-  height: 55px;
-  background: #FF8C42;
-  border: none;
+.contact-info a {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Contact Page */
+.contact-icon-wrapper {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  color: white;
+  background: rgba(255, 140, 66, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.scroll-top-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  font-size: 1.5rem;
+  color: #FF8C42;
+  margin-bottom: 1rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-content {
-    padding: 100px 1rem 2rem;
+  .main-content {
+    margin-top: 70px; /* Adjust for smaller navbar */
   }
   
-  .section-content {
-    padding: 3rem 1rem;
+  .hero-title {
+    font-size: 2rem !important;
   }
   
   .navbar-custom .container {
     padding: 0 1rem;
   }
   
-  .cta-form {
-    flex-direction: column;
-    border-radius: 20px;
-    padding: 20px;
-  }
-  
-  .cta-input {
-    margin-bottom: 15px;
-    border-radius: 15px;
-  }
-  
-  .cta-button {
-    width: 100%;
-    height: 50px;
-    border-radius: 15px;
-  }
-  
-  .hero-illustration {
-    height: 300px;
+  .hero-image {
     margin-top: 2rem;
   }
   
-  .feature-illustration {
-    height: 250px;
-    max-width: 100%;
+  .benefit-icon-wrapper {
+    width: 60px;
+    height: 60px;
   }
   
-  .benefit-icon {
+  .product-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .modal-content {
+    padding: 1.5rem;
+  }
+}
+
+/* Add these styles to your src/styles/style.css file */
+
+/* Hero Section Styles */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.hero-slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 100%;
+}
+
+/* IN src/styles/style.css */
+
+.hero-slide {
+  min-width: 100%;
+  height: 100%;
+  /* 
+    NEW BACKGROUND IMAGE
+    We set the image, position it, and add a semi-transparent overlay
+    so the text on top is still readable.
+  */
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Dark overlay */
+    url('public/images/img5.png'); /* Your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+/* 
+  IMPORTANT: Because the background is now dark, we need to make the 
+  text on the left side white so it's readable.
+*/
+.hero-title, .hero-subtitle, .milk-indicators span {
+  color: #ffffff !important; /* Force text to be white */
+}
+
+.hero-badge .badge {
+  background-color: #FF8C42 !important; /* Make badge more visible */
+  color: #ffffff !important;
+}
+.hero-badge {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #2C3E50;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: #555;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.hero-image-container {
+  position: relative;
+  animation: fadeIn 1s ease-out 0.6s both;
+}
+
+.floating-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.hero-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #FF8C42;
+  transform: scale(1.2);
+}
+
+/* Stats Section */
+.stat-item h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+/* Benefits Section */
+.benefit-card {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.benefit-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.benefit-card:hover .benefit-icon-wrapper {
+  transform: scale(1.1);
+}
+
+/* Products Section */
+.product-card {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1;
+}
+
+.product-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 140, 66, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.product-card:hover .product-icon {
+  transform: scale(1.1);
+  background: rgba(255, 140, 66, 0.2);
+}
+
+/* Process Section */
+.process-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #FF8C42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.process-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  color: #FF8C42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.process-item:hover .process-icon-wrapper {
+  transform: scale(1.1);
+}
+
+/* Testimonial Section */
+.testimonial-card {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.testimonial-avatar {
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover .testimonial-avatar {
+  transform: scale(1.1);
+}
+
+/* CTA Section */
+.cta-shape-1, .cta-shape-2 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+
+.cta-shape-1 {
+  width: 300px;
+  height: 300px;
+  bottom: -150px;
+  left: -100px;
+}
+
+.cta-shape-2 {
+  width: 200px;
+  height: 200px;
+  top: -100px;
+  right: -50px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem !important;
+  }
+  
+  .stat-item h2 {
+    font-size: 2rem;
+  }
+  
+  .benefit-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .product-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .process-icon-wrapper {
     width: 60px;
     height: 60px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .hero-indicators {
+    bottom: 10px;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Add these styles to your src/styles/style.css file */
+
+/* Hero Section Milk Theme */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 50%, #f8f9fa 100%);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Milk splash elements */
+.milk-splash {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  filter: blur(15px);
+}
+
+.milk-splash-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: -100px;
+}
+
+.milk-splash-2 {
+  width: 200px;
+  height: 200px;
+  bottom: 100px;
+  left: -50px;
+}
+
+.milk-splash-3 {
+  width: 150px;
+  height: 150px;
+  bottom: -50px;
+  right: 200px;
+}
+
+/* Milk bubbles */
+.milk-bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: float 8s infinite ease-in-out;
+}
+
+.milk-bubble-1 {
+  width: 40px;
+  height: 40px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.milk-bubble-2 {
+  width: 25px;
+  height: 25px;
+  top: 30%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.milk-bubble-3 {
+  width: 30px;
+  height: 30px;
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 2s;
+}
+
+/* Hero content styling */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #2C3E50;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  color: #555;
+  max-width: 500px;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.hero-btn {
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Milk quality indicators */
+.milk-indicators {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+.milk-check-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FF8C42;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Milk bottle illustration */
+.milk-bottle {
+  position: relative;
+  width: 120px;
+  height: 250px;
+  margin: 0 auto 20px;
+  animation: float 4s infinite ease-in-out;
+}
+
+.milk-bottle-cap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 20px;
+  background: #FF8C42;
+  border-radius: 5px 5px 0 0;
+}
+
+.milk-bottle-body {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #FF8C42;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+}
+
+.milk-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: linear-gradient(to top, #f8f9fa, #ffffff);
+  animation: milkWave 6s infinite ease-in-out;
+}
+
+.milk-bottle-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 80px;
+  background: rgba(255, 140, 66, 0.2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milk-bottle-text {
+  font-weight: bold;
+  color: #FF8C42;
+  font-size: 12px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Gir cow image */
+.gir-cow-image {
+  max-height: 300px;
+  position: relative;
+  z-index: 1;
+  animation: float 5s infinite ease-in-out;
+  animation-delay: 1s;
+}
+
+/* Floating badge */
+.floating-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  animation: float 3s infinite ease-in-out;
+}
+
+/* Milk drops animation */
+.milk-drops {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.milk-drop {
+  position: absolute;
+  width: 10px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: milkDrop 3s infinite ease-in;
+}
+
+.milk-drop-1 {
+  top: 20px;
+  left: 40%;
+  animation-delay: 0s;
+}
+
+.milk-drop-2 {
+  top: 30px;
+  left: 60%;
+  animation-delay: 1s;
+}
+
+.milk-drop-3 {
+  top: 25px;
+  left: 50%;
+  animation-delay: 2s;
+}
+
+/* Hero indicators */
+.hero-indicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #FF8C42;
+  transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes milkWave {
+  0%, 100% {
+    height: 70%;
+  }
+  50% {
+    height: 75%;
+  }
+}
+
+@keyframes milkDrop {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .hero-title {
     font-size: 2rem !important;
   }
   
-  .product-card {
-    margin-bottom: 2rem;
+  .hero-subtitle {
+    font-size: 1rem !important;
   }
   
-  .testimonial-card {
-    min-width: 300px;
+  .milk-bottle {
+    width: 100px;
+    height: 200px;
   }
-}
-
-/* ============================= */
-/* Footer Base Styling           */
-/* ============================= */
-footer {
-  background: #2C3E50;
-  color: #fff;
-  padding-top: 3rem;
-  padding-bottom: 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Subtle gradient overlay */
-footer::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(255,140,66,0.05), rgba(255,255,255,0.05));
-  z-index: 0;
-}
-
-/* Content on top of overlay */
-footer .section-content {
-  position: relative;
-  z-index: 1;
-}
-
-/* ============================= */
-/* Footer Links Hover            */
-/* ============================= */
-footer a {
-  transition: color 0.3s ease, transform 0.25s ease;
-  display: inline-block;
-}
-
-footer a:hover {
-  color: #FF8C42 !important; /* Brand Highlight */
-  transform: translateX(6px) scale(1.07);
-  text-decoration: none;
-}
-
-/* ============================= */
-/* Social Icons Hover            */
-/* ============================= */
-footer a svg {
-  transition: color 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
-}
-
-footer a:hover svg {
-  color: #FF8C42 !important;
-  transform: scale(1.3) rotate(10deg);
-  box-shadow: 0px 4px 15px rgba(255, 140, 66, 0.5);
-  border-radius: 50%;
-}
-
-/* ============================= */
-/* Footer Headings Hover          */
-/* ============================= */
-footer h3,
-footer h5 {
-  position: relative;
-  display: inline-block;
-  transition: color 0.3s ease;
-}
-
-footer h3:hover,
-footer h5:hover {
-  color: #FF8C42;
-  cursor: pointer;
-}
-
-/* Stylish underline effect */
-footer h5::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #FF8C42;
-  transition: width 0.3s;
-  margin-top: 4px;
-}
-
-footer h5:hover::after {
-  width: 100%;
-}
-
-/* ============================= */
-/* Footer Paragraph Hover        */
-/* ============================= */
-footer p {
-  transition: color 0.3s ease;
-}
-
-footer p:hover {
-  color: #e0e0e0;
-}
-
-/* ============================= */
-/* Responsive Styling            */
-/* ============================= */
-@media (max-width: 992px) {
-  footer .row {
-    text-align: center;
+  
+  .milk-bottle-body {
+    width: 70px;
+    height: 150px;
   }
-
-  footer .row .col-lg-4,
-  footer .row .col-lg-2,
-  footer .row .col-lg-3 {
-    margin-bottom: 2rem;
+  
+  .gir-cow-image {
+    max-height: 200px;
   }
-
-  /* Reduce hover transform on smaller screens */
-  footer a:hover {
-    transform: scale(1.08);
+  
+  .hero-indicators {
+    bottom: 20px;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
   }
 }
 
 @media (max-width: 576px) {
-  footer {
-    padding: 2rem 1rem;
+  .hero-title {
+    font-size: 1.8rem !important;
   }
-
-  footer h3 {
-    font-size: 1.4rem;
+  
+  .milk-splash-1 {
+    width: 200px;
+    height: 200px;
   }
-
-  footer h5 {
-    font-size: 1.1rem;
+  
+  .milk-splash-2 {
+    width: 150px;
+    height: 150px;
   }
-
-  footer a svg {
-    width: 18px;
-    height: 18px;
+  
+  .milk-splash-3 {
+    width: 100px;
+    height: 100px;
   }
 }
 
 
+/* Add these styles to your src/styles/style.css file */
 
-/* Contact Section */
-.contact-section {
-  background: #FFF8F0;
-  padding: 80px 20px;
-  min-height: 60vh;
+/* Enhanced Milk Bottle Styles */
+.milk-bottle-enhanced {
+  position: relative;
+  width: 150px;
+  height: 300px;
+  margin: 0 auto 30px;
+  animation: float 4s infinite ease-in-out;
 }
 
-.contact-card {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease;
+.milk-bottle-enhanced .milk-bottle-cap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 25px;
+  background: #8B4513; /* Brown color like in the screenshot */
+  border-radius: 5px 5px 0 0;
+  z-index: 2;
 }
 
-.contact-card:hover {
-  transform: translateY(-5px);
+.milk-bottle-enhanced .milk-bottle-body {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 220px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #f0f0f0;
+  border-radius: 0 0 15px 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Form Inputs */
-.form-input {
+.milk-bottle-enhanced .milk-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-  transition: all 0.3s ease;
-  font-size: 15px;
+  height: 75%;
+  background: linear-gradient(to top, #f8f8f8, #ffffff);
+  animation: milkWave 6s infinite ease-in-out;
 }
 
-.form-input:focus {
-  border-color: #ff8c42;
-  box-shadow: 0 0 6px rgba(255, 140, 66, 0.5);
+.milk-bottle-enhanced .milk-bottle-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  z-index: 1;
 }
 
-/* Submit Button */
-.form-submit {
-  background: linear-gradient(45deg, #ff8c42, #ff5e62);
-  color: #fff;
-  padding: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.form-submit:hover {
-  background: linear-gradient(45deg, #ff5e62, #ff8c42);
-  transform: scale(1.03);
-}
-
-/* WhatsApp Button */
-.whatsapp-btn {
-  background: #25d366;
-  color: #fff;
-  padding: 12px;
-  font-weight: 600;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  cursor: pointer;
+.milk-bottle-enhanced .label-circle {
+  width: 100%;
+  height: 100%;
+  background: #8B4513; /* Brown color like in the screenshot */
+  border-radius: 50%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 5px;
 }
 
-.whatsapp-btn:hover {
-  background: #1ebd5a;
-  transform: scale(1.03);
+.milk-bottle-enhanced .cow-icon {
+  font-size: 24px;
+  margin-bottom: 2px;
 }
 
-.whatsapp-btn svg {
-  font-size: 18px;
+.milk-bottle-enhanced .brand-name {
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
 }
 
-/* Section Title */
-.section-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #333;
+.milk-bottle-enhanced .milk-splash-effect {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  filter: blur(5px);
+  z-index: 0;
 }
 
-.hero-gradient-text {
-  background: linear-gradient(45deg, #ff8c42, #ff5e62);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.product-tagline {
+  font-family: 'Poppins', sans-serif;
+  text-transform: lowercase;
+  letter-spacing: 1px;
+  animation: fadeInUp 0.8s ease-out 1s both;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .contact-card {
-    padding: 20px;
+/* Update the hero background to be cleaner like in the screenshot */
+.hero-section {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  position: relative;
+}
+
+/* Add a subtle pattern to the background */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#f0f0f0 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.hero-content, .hero-image {
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation for milk wave effect */
+@keyframes milkWave {
+  0%, 100% {
+    height: 75%;
   }
-  .section-title {
-    font-size: 26px;
+  50% {
+    height: 80%;
   }
 }
 
-.why-choose-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+/* src/styles/style.css */
+
+/* Add this new class for the milk bottle image */
+.milk-bottle-image {
+  max-height: 400px; /* Adjust this value to control the size of your bottle */
+  animation: float 4s infinite ease-in-out;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); /* Adds a nice shadow */
 }
 
-.why-choose-card {
-  transition: all 0.3s ease;
+/* You can now remove or comment out all the old CSS for .milk-bottle-enhanced 
+   since we are using a real image instead of drawing it with CSS */
+
+   /* src/styles/style.css */
+
+/* Add this new rule to position the image column at the top */
+/* This targets the right column inside the hero slide */
+.hero-slide .row .col-lg-6:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Keep the image centered horizontally */
+  justify-content: flex-start; /* Align content to the top */
+  padding-top: 40px; /* Add some space from the very top of the screen */
+}
+
+/* Add this rule to ensure the image container itself doesn't add extra space */
+.hero-image-container {
+  width: 100%;
+  /* Remove any default margins or padding that might push it down */
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* You can keep the floating badge and tagline as they are */
+.floating-badge {
+  position: absolute;
+  top: 20px; /* This positions it relative to the hero-image-container */
+  right: 20px;
+  z-index: 2;
+}
+
+.product-tagline {
+  margin-top: 1rem; /* Adjust space between image and tagline */
 }

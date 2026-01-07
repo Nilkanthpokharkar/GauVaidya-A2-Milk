@@ -1,41 +1,40 @@
+// src/components/Footer.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaInstagram, FaWhatsapp } from 'react-icons/fa';
-import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
+import { FaFacebookF, FaTwitter, FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="full-width-section text-white" style={{ background: '#2C3E50' }}>
-      <div className="section-content">
+    <footer className="footer">
+      <div className="container">
         <div className="row">
-          <div className="col-lg-4 mb-4">
-            <div className="mb-3">
-              <h3 className="fw-bold" style={{ color: '#FF8C42' }}>GauVeda</h3>
-            </div>
-            <p className="opacity-75 mb-4">
-              Premium A2 milk from indigenous Gir cows, delivered fresh to your doorstep daily.
-            </p>
-            <div className="mb-3">
-              <strong className="d-block mb-2">Address:</strong>
-              <span className="opacity-75">
-                Gauveda Organic Farm, Wakad, Hinjewadi, District Pune, Maharashtra - 410511, India.
-              </span>
-            </div>
-            <div className="mb-2">
-              <a href="mailto:gauveda.milk@gmail.com" className="text-decoration-none opacity-75 text-white">
-                <MdEmail className="me-2" />
-                gauveda.milk@gmail.com
-              </a>
-            </div>
-            <div>
-              <a href="tel:+919322604350" className="text-decoration-none opacity-75 text-white">
-                <MdPhone className="me-2" />
-                +91 93226 04350
-              </a>
+          <div className="col-lg-4 col-md-6 mb-4">
+            <div className="footer-logo">
+              <Link to="/" className="d-flex align-items-center mb-3">
+                <img src="public/images/image.png" alt="GouVaidya" height="50" className="me-2" />
+                <h3 className="fw-bold mb-0" style={{ color: '#FF8C42' }}>GouVaidya</h3>
+              </Link>
+              <p className="mb-4">
+                Premium A2 milk from indigenous Gir cows, delivered fresh to your doorstep daily.
+              </p>
+              <div className="social-links">
+                <a href="https://facebook.com/gouVaidya" target="_blank" rel="noopener noreferrer" className="me-2">
+                  <FaFacebookF />
+                </a>
+                <a href="https://twitter.com/gouVaidya" target="_blank" rel="noopener noreferrer" className="me-2">
+                  <FaTwitter />
+                </a>
+                <a href="https://instagram.com/gouVaidya" target="_blank" rel="noopener noreferrer" className="me-2">
+                  <FaInstagram />
+                </a>
+                <a href="https://wa.me/919322604350" target="_blank" rel="noopener noreferrer">
+                  <FaWhatsapp />
+                </a>
+              </div>
             </div>
           </div>
           
-          <div className="col-lg-2 col-md-4 mb-4">
+          <div className="col-lg-2 col-md-6 mb-4">
             <h5 className="fw-semibold mb-3">Quick Links</h5>
             <ul className="list-unstyled">
               {[
@@ -43,10 +42,10 @@ const Footer = () => {
                 { path: '/products', label: 'Products' },
                 { path: '/about', label: 'About Us' },
                 { path: '/reviews', label: 'Reviews' },
-                { path: '/contact', label: 'Contact' } // Add Contact link
+                { path: '/contact', label: 'Contact' }
               ].map((item) => (
                 <li className="mb-2" key={item.path}>
-                  <Link to={item.path} className="text-decoration-none opacity-75 text-white">
+                  <Link to={item.path} className="text-decoration-none text-light">
                     {item.label}
                   </Link>
                 </li>
@@ -54,8 +53,8 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div className="col-lg-3 col-md-4 mb-4">
-            <h5 className="fw-semibold mb-3">Products</h5>
+          <div className="col-lg-3 col-md-6 mb-4">
+            <h5 className="fw-semibold mb-3">Our Products</h5>
             <ul className="list-unstyled">
               {[
                 'A2 Fresh Milk',
@@ -65,7 +64,7 @@ const Footer = () => {
                 'A2 Buttermilk'
               ].map((product) => (
                 <li className="mb-2" key={product}>
-                  <Link to="/products" className="text-decoration-none opacity-75 text-white">
+                  <Link to="/products" className="text-decoration-none text-light">
                     {product}
                   </Link>
                 </li>
@@ -73,51 +72,42 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div className="col-lg-3 col-md-4 mb-4">
-            <h5 className="fw-semibold mb-3">Support</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2">
-                <Link to="/order-now" className="text-decoration-none opacity-75 text-white">Order Now</Link>
+          <div className="col-lg-3 col-md-6 mb-4">
+            <h5 className="fw-semibold mb-3">Contact Us</h5>
+            <ul className="list-unstyled contact-info">
+              <li className="mb-3 d-flex align-items-start">
+                <FaMapMarkerAlt className="me-3 mt-1" />
+                <span>GouVaidya Organic Farm, Wakad, Hinjewadi, District Pune, Maharashtra - 410511, India.</span>
               </li>
-              <li className="mb-2">
-                <Link to="/contact" className="text-decoration-none opacity-75 text-white">Contact Us</Link> {/* Update this link */}
+              <li className="mb-3 d-flex align-items-center">
+                <FaPhone className="me-3" />
+                <a href="tel:+919322604350" className="text-decoration-none text-light">+91 93226 04350</a>
               </li>
-              <li className="mb-2">
-                <a href="#" className="text-decoration-none opacity-75 text-white">Delivery Info</a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="text-decoration-none opacity-75 text-white">FAQ</a>
-              </li>
-              <li className="mb-2">
-                <a href="#" className="text-decoration-none opacity-75 text-white">Privacy Policy</a>
+              <li className="mb-3 d-flex align-items-center">
+                <FaEnvelope className="me-3" />
+                <a href="mailto:gouVaidya.milk@gmail.com" className="text-decoration-none text-light">gouVaidya.milk@gmail.com</a>
               </li>
             </ul>
           </div>
         </div>
         
-        <hr className="my-4 opacity-25" />
+        <hr className="my-4 bg-light" />
         
         <div className="row align-items-center">
-          <div className="col-md-6 mb-3 mb-md-0">
-            <p className="mb-0 opacity-75">
-              © {new Date().getFullYear()} GauVeda A2 Milk. All rights reserved.
+          <div className="col-md-6">
+            <p className="mb-0 text-light">
+              © {new Date().getFullYear()} GouVaidya A2 Milk. All rights reserved.
             </p>
           </div>
-          <div className="col-md-6">
-            <div className="d-flex justify-content-md-end justify-content-center gap-3">
-              <a href="https://facebook.com/gaudeva" target="_blank" rel="noopener noreferrer" className="text-white opacity-75">
-                <FaFacebookF size={20} />
-              </a>
-              <a href="https://twitter.com/gaudeva" target="_blank" rel="noopener noreferrer" className="text-white opacity-75">
-                <FaTwitter size={20} />
-              </a>
-              <a href="https://instagram.com/gaudeva" target="_blank" rel="noopener noreferrer" className="text-white opacity-75">
-                <FaInstagram size={20} />
-              </a>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-white opacity-75">
-                <FaWhatsapp size={20} />
-              </a>
-            </div>
+          <div className="col-md-6 text-md-end">
+            <ul className="list-inline mb-0">
+              <li className="list-inline-item me-3">
+                <Link to="/privacy-policy" className="text-decoration-none text-light">Privacy Policy</Link>
+              </li>
+              <li className="list-inline-item">
+                <Link to="/terms" className="text-decoration-none text-light">Terms of Service</Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
