@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaWhatsapp, FaTruck, FaLeaf, FaAward, FaHeart, FaShoppingCart, FaChevronRight, FaStar, FaPlay, FaCheck } from 'react-icons/fa';
-import Order from '../components/Order';
+import Order from '../components/Order.jsx';
 
 const Home = () => {
   const [showForm, setShowForm] = useState(false);

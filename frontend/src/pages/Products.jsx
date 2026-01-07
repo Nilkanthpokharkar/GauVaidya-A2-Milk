@@ -1,7 +1,7 @@
 // src/pages/Products.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Order from '../components/Order';
+import Order from '../components/Order.jsx';
 
 const Products = () => {
   const [showForm, setShowForm] = useState(false);
