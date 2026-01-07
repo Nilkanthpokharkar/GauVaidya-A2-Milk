@@ -1,4 +1,3 @@
-// src/pages/Contact.js
 import React, { useState } from 'react';
 import { FaWhatsapp, FaPhone, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
 
@@ -12,6 +11,7 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,18 +20,43 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSuccessMessage('');
+    setErrorMessage('');
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSuccessMessage('Message sent successfully! We will get back to you soon.');
-      setFormData({
-        fullName: '',
-        contactNo: '',
-        email: '',
-        message: '',
+    try {
+      // Make REAL API call to your working backend
+      const response = await fetch("http://localhost:5006/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }, 1500);
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSuccessMessage('✅ Thank you! Your message has been sent successfully. We will get back to you soon.');
+        // Reset form on success
+        setFormData({
+          fullName: '',
+          contactNo: '',
+          email: '',
+          message: '',
+        });
+      } else {
+        setErrorMessage('❌ ' + (data.message || 'Failed to send message. Please try again.'));
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      setErrorMessage('⚠️ Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear messages after 5 seconds
+      setTimeout(() => {
+        setSuccessMessage('');
+        setErrorMessage('');
+      }, 5000);
+    }
   };
 
   const handleWhatsApp = () => {
@@ -61,6 +86,10 @@ const Contact = () => {
 
                 {successMessage && (
                   <div className="alert alert-success text-center mb-4">{successMessage}</div>
+                )}
+
+                {errorMessage && (
+                  <div className="alert alert-danger text-center mb-4">{errorMessage}</div>
                 )}
 
                 <form onSubmit={handleSubmit}>
