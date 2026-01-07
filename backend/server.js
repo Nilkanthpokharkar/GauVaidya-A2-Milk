@@ -8,9 +8,10 @@ const app = express();
 // --- 1. ENHANCED MIDDLEWARE ---
 // This configuration ensures that Render's HTTPS and pre-flight requests pass through
 app.use(cors({
-  origin: "*", // Allows all origins. For tighter security, use your specific frontend Render URL
+  origin: "https://gauvaidya-frontend.onrender.com", // Replace with your ACTUAL frontend URL
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
 
 app.use(express.json());
