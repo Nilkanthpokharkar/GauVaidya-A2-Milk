@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const OrderModal = ({ show, onClose, product }) => {
+const Order = ({ show, onClose, product }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -222,4 +222,4 @@ const OrderModal = ({ show, onClose, product }) => {
   );
 };
 
-export default OrderModal;
+export default Order;
