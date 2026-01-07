@@ -406,7 +406,7 @@ html, body {
   */
   background-image: 
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), /* Dark overlay */
-    url('public/images/img5.png'); /* Your background image */
+    url('/images/img5.png'); /* Your background image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
