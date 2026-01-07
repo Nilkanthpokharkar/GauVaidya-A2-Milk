@@ -15,8 +15,7 @@ const OrderModal = ({ show, onClose, product }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // IMPORTANT: Replace the URL below with your actual Render Backend URL 
-  // (Found in Render Dashboard -> Backend Service -> URL at the top)
+  // Backend URL logic
   const API_BASE_URL = window.location.hostname === 'localhost' 
     ? "http://localhost:5006" 
     : "https://gauvaidya-a2-milk-backend.onrender.com"; 
@@ -24,6 +23,16 @@ const OrderModal = ({ show, onClose, product }) => {
   useEffect(() => {
     setFormData(prev => ({ ...prev, product: product || '' }));
   }, [product]);
+
+  // Function to play success sound
+  const playSuccessSound = () => {
+    try {
+      const audio = new Audio('/sounds/success.mp3');
+      audio.play();
+    } catch (error) {
+      console.error("Audio playback failed:", error);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,6 +55,9 @@ const OrderModal = ({ show, onClose, product }) => {
       const data = await response.json();
 
       if (response.ok) {
+        // Play success sound
+        playSuccessSound();
+
         setSuccessMessage('Order placed successfully! We will contact you soon.');
         
         setTimeout(() => {
@@ -88,7 +100,8 @@ const OrderModal = ({ show, onClose, product }) => {
         <h3 className="text-center mb-4 fw-semibold">Order Fresh A2 Milk</h3>
 
         {successMessage && (
-          <div className="alert alert-success text-center border-0 shadow-sm">
+          <div className="alert alert-success text-center border-0 shadow-sm animate__animated animate__fadeIn">
+            <div className="mb-2">🎉</div>
             {successMessage}
           </div>
         )}
